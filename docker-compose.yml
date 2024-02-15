@@ -18,15 +18,14 @@ services:
     image: elestio/redis:7.0
     restart: always
     ports:
-      - "172.17.0.16379:6379"
+      - "172.17.0.1:16379:6379"
 
   migration_runner:
     image: rust:latest
-    restart: always
     command: "bash -c 'cargo install diesel_cli --no-default-features --features postgres && diesel migration --database-url postgres://$${DATABASE_USER}:$${DATABASE_PASSWORD}@$${DATABASE_HOST}:$${DATABASE_PORT}/$${DATABASE_NAME} run'"
     working_dir: /app
     volumes:
-      - ./app:/app
+      - ./:/app
     environment:
       - DATABASE_USER=${POSTGRES_USER}
       - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
@@ -151,7 +150,7 @@ services:
     image: grafana/grafana:latest
     restart: always
     ports:
-      - "3000:3000"
+      - "172.17.0.1:64972:3000"
     profiles:
       - monitoring
     environment:
@@ -224,7 +223,7 @@ services:
     profiles:
       - full_kv
     ports:
-      - "8001:8001"
+      - "172.17.0.1:11392:8001"
     volumes:
       - ./redisinsight_store:/db
 
@@ -265,7 +264,7 @@ services:
     image: provectuslabs/kafka-ui:latest
     restart: always
     ports:
-      - 8090:8080
+      - 172.17.0.1:63773:8080
     depends_on:
       - kafka0
     profiles:
