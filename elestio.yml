@@ -7,46 +7,6 @@ ports:
     public: true
     path: "/"
     isAuth: false
-  - protocol: "HTTPS"
-    targetProtocol: "HTTP"
-    listeningPort: "45150"
-    targetPort: "64972"
-    targetIP: "172.17.0.1"
-    public: true
-    path: "/"
-    isAuth: false
-  - protocol: "HTTPS"
-    targetProtocol: "HTTP"
-    listeningPort: "33419"
-    targetPort: "11392"
-    targetIP: "172.17.0.1"
-    public: true
-    path: "/"
-    isAuth: false
-  - protocol: "HTTPS"
-    targetProtocol: "HTTP"
-    listeningPort: "7854"
-    targetPort: "63773"
-    targetIP: "172.17.0.1"
-    public: true
-    path: "/"
-    isAuth: false
-  - protocol: "HTTPS"
-    targetProtocol: "HTTP"
-    listeningPort: "3443"
-    targetPort: "4500"
-    targetIP: "172.17.0.1"
-    public: true
-    path: "/"
-    isAuth: false
-  - protocol: "HTTPS"
-    targetProtocol: "HTTP"
-    listeningPort: "2443"
-    targetPort: "4701"
-    targetIP: "172.17.0.1"
-    public: true
-    path: "/"
-    isAuth: false
 environments:
   - key: "ADMIN_EMAIL"
     value: "[EMAIL]"
