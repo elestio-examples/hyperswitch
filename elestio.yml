@@ -62,6 +62,10 @@ environments:
     value: "pg"
   - key: "DATABASE_PORT"
     value: "5432"
+  - key: "DOMAIN"
+    value: "[CI_CD_DOMAIN]"
+  - key: "FROM_EMAIL"
+    value: "[DOMAIN]@vm.elestio.app"
 
 config:
   runTime: "dockerCompose"
