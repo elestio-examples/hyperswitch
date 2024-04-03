@@ -26,7 +26,7 @@ chmod +x ./monitoring/kafka-script.sh
 sed -i "s~db_user~${POSTGRES_USER}~g" ./config/docker_compose.toml
 sed -i "s~db_pass~${POSTGRES_PASSWORD}~g" ./config/docker_compose.toml
 sed -i "s~test_admin~${ADMIN_PASSWORD}~g" ./config/docker_compose.toml
-sed -i "s~secret~${ADMIN_PASSWORD}~g" ./config/docker_compose.toml
+sed -i "s~jwt_secret = \"secret\"~jwt_secret = \"${ADMIN_PASSWORD}\"~g" ./config/docker_compose.toml
 sed -i "s~recon_test_admin~${ADMIN_PASSWORD}~g" ./config/docker_compose.toml
 sed -i "s~\${HOSTNAME}~${DOMAIN}~g" ./config/grafana.ini
 sed -i "s~domain = localhost~domain = ${DOMAIN}~g" ./config/grafana.ini
