@@ -30,3 +30,8 @@ You can find the file `docker_compose.toml` by following these instructions:
 4. Click on the Access link.
 5. Paste the copied password when prompted.
 6. docker_compose.toml is located at `config>docker_compose.toml`
+
+If you want to edit this file, don't forget to do thesed commands:
+
+    docker-compose down;
+    docker-compose up -d;
