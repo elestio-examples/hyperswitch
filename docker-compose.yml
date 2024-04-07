@@ -35,7 +35,7 @@ services:
 
   ### Application services
   hyperswitch-server:
-    image: juspaydotin/hyperswitch-router:standalone
+    image: juspaydotin/hyperswitch-router:${SOFTWARE_VERSION_TAG}
     restart: always
     command: /local/bin/router -f /local/config/docker_compose.toml
     ports:
@@ -47,7 +47,7 @@ services:
       logs: "promtail"
 
   hyperswitch-producer:
-    image: juspaydotin/hyperswitch-producer:standalone
+    image: juspaydotin/hyperswitch-producer:${SOFTWARE_VERSION_TAG}
     restart: always
     command: /local/bin/scheduler -f /local/config/docker_compose.toml
     volumes:
@@ -60,7 +60,7 @@ services:
       logs: "promtail"
 
   hyperswitch-consumer:
-    image: juspaydotin/hyperswitch-consumer:standalone
+    image: juspaydotin/hyperswitch-consumer:${SOFTWARE_VERSION_TAG}
     restart: always
     command: /local/bin/scheduler -f /local/config/docker_compose.toml
     volumes:
@@ -73,7 +73,7 @@ services:
       logs: "promtail"
 
   hyperswitch-drainer:
-    image: juspaydotin/hyperswitch-drainer:standalone
+    image: juspaydotin/hyperswitch-drainer:${SOFTWARE_VERSION_TAG}
     restart: always
     command: /local/bin/drainer -f /local/config/docker_compose.toml
     deploy:
