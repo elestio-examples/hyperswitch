@@ -16,6 +16,18 @@ Once deployed, you can access Hyperswitch through the following link:
 
 Ensure that your server is running by visiting the provided link.
 
+You can open Grafana UI here:
+
+    URL: https://[CI_CD_DOMAIN]:45150
+    login: "root"
+    password: [ADMIN_PASSWORD]
+
+You can open Kafka UI here:
+
+    URL: https://[CI_CD_DOMAIN]:7854
+    login: "root"
+    password: [ADMIN_PASSWORD]
+
 # Usage
 
 To learn more about how to use Hyperswitch and maximize its capabilities, refer to <a target="_blank" href="https://github.com/juspay/hyperswitch/blob/main/docs/try_local_system.md#try-out-our-apis">Hyperswitch tutorial</a> to learn more about.
