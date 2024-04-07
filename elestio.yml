@@ -27,6 +27,8 @@ ports:
     password: "random_password"
     loginTitle: "Kafka UI"
 environments:
+  - key: "SOFTWARE_VERSION_TAG"
+    value: "standalone"
   - key: "ADMIN_EMAIL"
     value: "[EMAIL]"
   - key: "ADMIN_PASSWORD"
