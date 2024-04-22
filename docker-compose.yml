@@ -104,19 +104,7 @@ services:
     depends_on:
       - redis-cluster
     command: >
-      bash -c 'export COUNT=${REDIS_CLUSTER_COUNT:-3};
-      if [ $COUNT -lt 3 ]; then
-        echo "Minimum 3 nodes are needed for redis cluster";
-        exit 1;
-      fi;
-      HOSTS="";
-      for ((c=1; c<=$COUNT;c++)); do
-        NODE=$COMPOSE_PROJECT_NAME-redis-cluster-$c:6379;
-        echo $NODE;
-        HOSTS="$HOSTS $NODE";
-      done;
-      echo Creating a cluster with $HOSTS;
-      redis-cli --cluster create $HOSTS --cluster-yes'
+      sh -c 'redis-cli --cluster create app_redis-cluster_1:6379 app_redis-cluster_2:6379 app_redis-cluster_3:6379 --cluster-yes'
 
   ### Monitoring
   grafana:
