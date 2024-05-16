@@ -28,7 +28,7 @@ ports:
     loginTitle: "Kafka UI"
 environments:
   - key: "SOFTWARE_VERSION_TAG"
-    value: "2024.04.12.1-standalone"
+    value: "nightly"
   - key: "ADMIN_EMAIL"
     value: "[EMAIL]"
   - key: "ADMIN_PASSWORD"
