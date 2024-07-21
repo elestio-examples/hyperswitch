@@ -3,7 +3,7 @@ version: "3.8"
 services:
   ### Dependencies
   pg:
-    image: elestio/postgres:15
+    image: elestio/postgres:16
     restart: always
     ports:
       - "172.17.0.1:20011:5432"
