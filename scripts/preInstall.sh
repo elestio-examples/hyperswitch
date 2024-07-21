@@ -22,6 +22,7 @@ cp -r ./hyper/config/prometheus.yaml ./config/prometheus.yaml
 cp -r ./hyper/config/tempo.yaml ./config/tempo.yaml
 cp -r ./hyper/config/vector.yaml ./config/vector.yaml
 cp -r ./hyper/monitoring/kafka-script.sh ./monitoring/kafka-script.sh
+cp -r ./hyper/justfile ./migrations/justfile
 cp -r ./hyper/crates/* ./crates/
 
 chmod +x ./monitoring/kafka-script.sh
