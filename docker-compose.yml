@@ -237,8 +237,6 @@ services:
       - olap
     ports:
       - "9200:9200"
-    networks:
-      - router_net
 
   opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:2
@@ -248,8 +246,6 @@ services:
       - olap
     environment:
       OPENSEARCH_HOSTS: '["https://opensearch:9200"]'
-    networks:
-      - router_net
 
   vector:
     image: timberio/vector:latest-debian
@@ -261,8 +257,6 @@ services:
       - olap
     environment:
       KAFKA_HOST: "kafka0:29092"
-    networks:
-      - router_net
     volumes:
       - ./config/vector.yaml:/etc/vector/vector.yaml
       - /var/run/docker.sock:/var/run/docker.sock
