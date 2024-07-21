@@ -22,7 +22,7 @@ cp -r ./hyper/config/prometheus.yaml ./config/prometheus.yaml
 cp -r ./hyper/config/tempo.yaml ./config/tempo.yaml
 cp -r ./hyper/config/vector.yaml ./config/vector.yaml
 cp -r ./hyper/monitoring/kafka-script.sh ./monitoring/kafka-script.sh
-cp -r ./hyper/justfile ./migrations/justfile
+cp -r ./justfile ./migrations/justfile
 cp -r ./hyper/crates/* ./crates/
 
 chmod +x ./monitoring/kafka-script.sh
@@ -38,3 +38,4 @@ sed -i "s~host = localhost:25~host = 172.17.0.1:25~g" ./config/grafana.ini
 sed -i "s~from_address = admin@grafana.localhost~from_address = ${FROM_EMAIL}~g" ./config/grafana.ini
 
 rm -rf ./hyper
+rm -rf ./justfile
