@@ -214,12 +214,55 @@ services:
       KAFKA_CLUSTERS_0_JMXPORT: 9997
 
   clickhouse-server:
-    image: clickhouse/clickhouse-server:23.5
+    image: clickhouse/clickhouse-server:24.3
     restart: always
     ports:
       - "9000"
       - "8123:8123"
+    volumes:
+      - ./crates/analytics/docs/clickhouse/scripts:/docker-entrypoint-initdb.d
     ulimits:
       nofile:
         soft: 262144
         hard: 262144
+
+  opensearch:
+    image: opensearchproject/opensearch:2
+    container_name: opensearch
+    hostname: opensearch
+    environment:
+      - "discovery.type=single-node"
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=0penS3arc#
+    profiles:
+      - olap
+    ports:
+      - "9200:9200"
+    networks:
+      - router_net
+
+  opensearch-dashboards:
+    image: opensearchproject/opensearch-dashboards:2
+    ports:
+      - 5601:5601
+    profiles:
+      - olap
+    environment:
+      OPENSEARCH_HOSTS: '["https://opensearch:9200"]'
+    networks:
+      - router_net
+
+  vector:
+    image: timberio/vector:latest-debian
+    ports:
+      - "8686"
+      - "9598"
+      - "3103:3103"
+    profiles:
+      - olap
+    environment:
+      KAFKA_HOST: "kafka0:29092"
+    networks:
+      - router_net
+    volumes:
+      - ./config/vector.yaml:/etc/vector/vector.yaml
+      - /var/run/docker.sock:/var/run/docker.sock

@@ -8,6 +8,7 @@ mkdir -p ./migrations/migrations
 mkdir -p ./config
 mkdir -p ./monitoring
 chown -R 1000:1000 ./migrations
+mkdir -p ./crates
 
 cp -r ./hyper/migrations/* ./migrations/migrations
 cp -r ./hyper/config/docker_compose.toml ./config/docker_compose.toml
@@ -19,7 +20,9 @@ cp -r ./hyper/config/loki.yaml ./config/loki.yaml
 cp -r ./hyper/config/otel-collector.yaml ./config/otel-collector.yaml
 cp -r ./hyper/config/prometheus.yaml ./config/prometheus.yaml
 cp -r ./hyper/config/tempo.yaml ./config/tempo.yaml
+cp -r ./hyper/config/vector.yaml ./config/vector.yaml
 cp -r ./hyper/monitoring/kafka-script.sh ./monitoring/kafka-script.sh
+cp -r ./hyper/crates/* ./crates/
 
 chmod +x ./monitoring/kafka-script.sh
 
