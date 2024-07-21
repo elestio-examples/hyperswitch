@@ -8,7 +8,7 @@ services:
     ports:
       - "172.17.0.1:20011:5432"
     volumes:
-      - ./pg_data:/VAR/LIB/POSTGRESQL/DATA
+      - ./pg_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
