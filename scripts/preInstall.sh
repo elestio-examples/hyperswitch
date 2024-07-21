@@ -2,7 +2,7 @@
 set -o allexport; source .env; set +o allexport;
 
 
-git clone https://github.com/juspay/hyperswitch.git hyper
+git clone --depth 1 --branch latest https://github.com/juspay/hyperswitch hyper
 
 mkdir -p ./migrations/migrations
 mkdir -p ./config
