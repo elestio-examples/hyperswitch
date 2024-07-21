@@ -47,3 +47,5 @@ If you want to edit this file, don't forget to do these commands:
 
     docker-compose down;
     docker-compose up -d;
+
+#Note: We advise deploying just one HyperSwitch pipeline on each target.

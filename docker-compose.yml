@@ -22,20 +22,16 @@ services:
 
   migration_runner:
     image: rust:latest
-    command: "bash -c 'cargo install diesel_cli --no-default-features --features postgres && diesel migration --database-url postgres://$${DATABASE_USER}:$${DATABASE_PASSWORD}@$${DATABASE_HOST}:$${DATABASE_PORT}/$${DATABASE_NAME} run'"
+    command: "bash -c 'cargo install diesel_cli --no-default-features --features postgres && cargo install just && just migrate'"
     working_dir: /app
     volumes:
       - ./migrations:/app
     environment:
-      - DATABASE_USER=${POSTGRES_USER}
-      - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
-      - DATABASE_HOST=${DATABASE_HOST}
-      - DATABASE_PORT=${DATABASE_PORT}
-      - DATABASE_NAME=${POSTGRES_DB}
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${POSTGRES_DB}
 
   ### Application services
   hyperswitch-server:
-    image: juspaydotin/hyperswitch-router:standalone
+    image: juspaydotin/hyperswitch-router:${SOFTWARE_VERSION_TAG}
     restart: always
     command: /local/bin/router -f /local/config/docker_compose.toml
     ports:
@@ -47,7 +43,7 @@ services:
       logs: "promtail"
 
   hyperswitch-producer:
-    image: juspaydotin/hyperswitch-producer:standalone
+    image: juspaydotin/hyperswitch-producer:${SOFTWARE_VERSION_TAG}
     restart: always
     command: /local/bin/scheduler -f /local/config/docker_compose.toml
     volumes:
@@ -60,7 +56,7 @@ services:
       logs: "promtail"
 
   hyperswitch-consumer:
-    image: juspaydotin/hyperswitch-consumer:standalone
+    image: juspaydotin/hyperswitch-consumer:${SOFTWARE_VERSION_TAG}
     restart: always
     command: /local/bin/scheduler -f /local/config/docker_compose.toml
     volumes:
@@ -73,7 +69,7 @@ services:
       logs: "promtail"
 
   hyperswitch-drainer:
-    image: juspaydotin/hyperswitch-drainer:standalone
+    image: juspaydotin/hyperswitch-drainer:${SOFTWARE_VERSION_TAG}
     restart: always
     command: /local/bin/drainer -f /local/config/docker_compose.toml
     deploy:
@@ -104,19 +100,7 @@ services:
     depends_on:
       - redis-cluster
     command: >
-      bash -c 'export COUNT=${REDIS_CLUSTER_COUNT:-3};
-      if [ $COUNT -lt 3 ]; then
-        echo "Minimum 3 nodes are needed for redis cluster";
-        exit 1;
-      fi;
-      HOSTS="";
-      for ((c=1; c<=$COUNT;c++)); do
-        NODE=$COMPOSE_PROJECT_NAME-redis-cluster-$c:6379;
-        echo $NODE;
-        HOSTS="$HOSTS $NODE";
-      done;
-      echo Creating a cluster with $HOSTS;
-      redis-cli --cluster create $HOSTS --cluster-yes'
+      sh -c 'redis-cli --cluster create app_redis-cluster_1:6379 app_redis-cluster_2:6379 app_redis-cluster_3:6379 --cluster-yes'
 
   ### Monitoring
   grafana:
