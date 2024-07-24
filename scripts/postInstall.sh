@@ -6,4 +6,5 @@ echo "Waiting for software to be ready ..."
 sleep 150s;
 
 docker-compose up -d migration_runner
+docker-compose up -d opensearch
 sleep 150s;

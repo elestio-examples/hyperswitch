@@ -228,11 +228,12 @@ services:
 
   opensearch:
     image: opensearchproject/opensearch:2
+    restart: always
     container_name: opensearch
     hostname: opensearch
     environment:
       - "discovery.type=single-node"
-      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=0penS3arc#
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${ADMIN_PASSWORD}
     profiles:
       - olap
     ports:
@@ -240,6 +241,7 @@ services:
 
   opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:2
+    restart: always
     ports:
       - 5601:5601
     profiles:
@@ -249,6 +251,7 @@ services:
 
   vector:
     image: timberio/vector:latest-debian
+    restart: always
     ports:
       - "8686"
       - "9598"
