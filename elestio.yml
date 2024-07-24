@@ -9,6 +9,22 @@ ports:
     isAuth: false
   - protocol: "HTTPS"
     targetProtocol: "HTTP"
+    listeningPort: "64442"
+    targetPort: "51983"
+    targetIP: "172.17.0.1"
+    public: true
+    path: "/"
+    isAuth: false
+  - protocol: "HTTPS"
+    targetProtocol: "HTTP"
+    listeningPort: "50755"
+    targetPort: "61592"
+    targetIP: "172.17.0.1"
+    public: true
+    path: "/"
+    isAuth: false
+  - protocol: "HTTPS"
+    targetProtocol: "HTTP"
     listeningPort: "45150"
     targetPort: "64972"
     targetIP: "172.17.0.1"
@@ -28,7 +44,7 @@ ports:
     loginTitle: "Kafka UI"
 environments:
   - key: "SOFTWARE_VERSION_TAG"
-    value: "latest"
+    value: "standalone"
   - key: "ADMIN_EMAIL"
     value: "[EMAIL]"
   - key: "ADMIN_PASSWORD"
@@ -66,7 +82,7 @@ lifeCycleConfig:
   postRestoreCommand: "./scripts/postRestore.sh"
   postDeployCommand: "./scripts/postDeploy.sh"
 webUI:
-  - url: "https://[CI_CD_DOMAIN]"
+  - url: "https://[CI_CD_DOMAIN]:64442"
     label: "Hyperswitch"
     login: "[ADMIN_EMAIL]"
     password: "[ADMIN_PASSWORD]"

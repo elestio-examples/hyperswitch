@@ -81,6 +81,48 @@ services:
     labels:
       logs: "promtail"
 
+    ### Web Client
+  hyperswitch-web:
+    ports:
+      - "172.17.0.1:61592:9050"
+      - "9060:9060"
+      - "5252:5252"
+    # build:
+    #   context: ./docker
+    #   dockerfile: web.Dockerfile
+    image: juspaydotin/hyperswitch-web:v1.0.12
+    depends_on:
+      - hyperswitch-server
+    restart: always
+    environment:
+      - HYPERSWITCH_PUBLISHABLE_KEY=placeholder_publishable_key
+      - HYPERSWITCH_SECRET_KEY=placeholder_api_key
+      - HYPERSWITCH_SERVER_URL=https://${DOMAIN}
+      - HYPERSWITCH_SERVER_URL_FOR_DEMO_APP=http://hyperswitch-server:8080
+      - HYPERSWITCH_CLIENT_URL=https://${DOMAIN}:50755
+      - SELF_SERVER_URL=http://localhost:5252
+      - SDK_ENV=local
+      - ENV_LOGGING_URL=http://localhost:3103
+    labels:
+      logs: "promtail"
+
+  ### Control Center
+  hyperswitch-control-center:
+    image: juspaydotin/hyperswitch-control-center:latest
+    restart: always
+    pull_policy: always
+    ports:
+      - "172.17.0.1:51983:9000"
+    environment:
+      - configPath=/tmp/dashboard-config.toml
+    volumes:
+      - ./config/dashboard.toml:/tmp/dashboard-config.toml
+    depends_on:
+      - hyperswitch-server
+      - hyperswitch-web
+    labels:
+      logs: "promtail"
+
   ### Clustered Redis setup
   redis-cluster:
     image: elestio/redis:7.0

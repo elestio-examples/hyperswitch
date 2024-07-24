@@ -36,6 +36,8 @@ sed -i "s~password = \"admin\"~password = \"${ADMIN_PASSWORD}\"~g" ./config/dock
 sed -i "s~jwt_secret = \"secret\"~jwt_secret = \"${ADMIN_PASSWORD}\"~g" ./config/docker_compose.toml
 sed -i "s~recon_test_admin~${ADMIN_PASSWORD}~g" ./config/docker_compose.toml
 sed -i "s~\${HOSTNAME}~${DOMAIN}~g" ./config/grafana.ini
+sed -i "s~http://localhost:8080~https://${DOMAIN}~g" ./config/dashboard.toml
+sed -i "s~http://localhost:9050~https://${DOMAIN}:50755~g" ./config/dashboard.toml
 sed -i "s~domain = localhost~domain = ${DOMAIN}~g" ./config/grafana.ini
 sed -i "s~host = localhost:25~host = 172.17.0.1:25~g" ./config/grafana.ini
 sed -i "s~from_address = admin@grafana.localhost~from_address = ${FROM_EMAIL}~g" ./config/grafana.ini

@@ -16,6 +16,12 @@ Once deployed, you can access Hyperswitch through the following link:
 
 Ensure that your server is running by visiting the provided link.
 
+You can open Hyperswitch UI here:
+
+    URL: https://[CI_CD_DOMAIN]:64442
+    login: "[ADMIN_EMAIL]"
+    password: [ADMIN_PASSWORD]
+
 You can open Grafana UI here:
 
     URL: https://[CI_CD_DOMAIN]:45150
