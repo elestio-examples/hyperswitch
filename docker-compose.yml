@@ -229,7 +229,6 @@ services:
   opensearch:
     image: opensearchproject/opensearch:2
     restart: always
-    container_name: opensearch
     hostname: opensearch
     environment:
       - "discovery.type=single-node"
