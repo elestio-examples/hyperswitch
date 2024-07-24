@@ -3,11 +3,11 @@ set -o allexport; source .env; set +o allexport;
 
 #wait until the server is ready
 echo "Waiting for software to be ready ..."
-sleep 150s;
+sleep 200s;
 
 docker-compose up -d migration_runner
 docker-compose up -d opensearch
-sleep 150s;
+sleep 200s;
 
 
 curl https://${DOMAIN}/user/signup \
